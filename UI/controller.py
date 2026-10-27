@@ -28,4 +28,11 @@ class Controller:
         self._view.update()
 
     # Altre Funzioni Event Handler
-    # TODO
+
+    def mostra_strumenti(self, e):
+        self.lista_strumenti = self._model.get_strumenti()
+        return self.lista_strumenti
+
+
+    def cerca_strumenti_per_tipo(self,e):
+        pass
