@@ -30,9 +30,27 @@ class Controller:
     # Altre Funzioni Event Handler
 
     def mostra_strumenti(self, e):
-        self.lista_strumenti = self._model.get_strumenti()
-        return self.lista_strumenti
+        lista = self._model.get_strumenti()
+        if not lista:
+            self._view.update()
+            self._view.show_alert("❌ Non sono presenti strumenti nel database!.")
+            return
 
+        self._view.lista_strumenti.controls.clear()
+        for strumento in lista:
+            self._view.lista_strumenti.controls.append(ft.Text(f"Codice: {strumento['codice']} - Tipo: {strumento['tipo']} - Marca: {strumento['marca']} - Anno Acquisto: {strumento['anno_acquisto']} - Valore: {strumento['valore']}€"))
+        self._view.update()
 
     def cerca_strumenti_per_tipo(self,e):
-        pass
+        tipo = self._view.input_tipo_strumento.value
+        listaTipo = self._model.cerca_strumenti_per_tipo(tipo)
+        self._view.lista_strumenti_ricerca.controls.clear()
+        if not listaTipo:
+            self._view.update()
+            self._view.show_alert("❌ Strumento non presente nel database!")
+            return
+
+        for strumento in listaTipo:
+            self._view.lista_strumenti_ricerca.controls.append(ft.Text(f"Codice: {strumento['codice']} - Tipo: {strumento['tipo']} - Marca: {strumento['marca']} - Anno Acquisto: {strumento['anno_acquisto']} - Valore: {strumento['valore']}€"))
+        self._view.update()
+

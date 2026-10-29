@@ -85,6 +85,7 @@ class View:
             # Sezione 3
             ft.Row(spacing=10,
                    controls=[ft.Text("Strumenti", size=20), mostraStrumenti]),
+            self.lista_strumenti,
             ft.Divider(),
 
 
@@ -92,7 +93,8 @@ class View:
             # Sezione 4
             ft.Text("Cerca Strumento per Tipo", size=20),
             ft.Row(spacing=10,
-                   controls=[self.input_tipo_strumento, cercaStrumento]),)
+                   controls=[self.input_tipo_strumento, cercaStrumento]),
+            self.lista_strumenti_ricerca,)
 
     def cambia_tema(self, e):
         self.page.theme_mode = ft.ThemeMode.DARK if self.toggle_cambia_tema.value else ft.ThemeMode.LIGHT

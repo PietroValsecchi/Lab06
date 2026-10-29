@@ -37,10 +37,12 @@ class DepositoStrumenti:
         """
         listaStrumenti = []
         connection = get_connection()
-        cursor = connection.cursor()
-        for riga in cursor.execute("select * from strumento"):
+        cursor = connection.cursor(dictionary=True)
+        cursor.execute("select * from strumento")
+        for riga in cursor:
             listaStrumenti.append(riga)
-
+        cursor.close()
+        connection.close()
         return listaStrumenti
 
 
@@ -52,4 +54,13 @@ class DepositoStrumenti:
             :return: una lista con tutti gli strumenti del tipo indicato oppure None
         """
         listaStrumentiPerTipo = []
+        connection = get_connection()
+        cursor = connection.cursor(dictionary=True)
+        cursor.execute("select * from strumento")
+        for riga in cursor:
+            if tipo.lower() == riga['tipo'].lower():
+                listaStrumentiPerTipo.append(riga)
+        cursor.close()
+        connection.close()
+        return listaStrumentiPerTipo
 
