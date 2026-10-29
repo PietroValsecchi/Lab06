@@ -33,7 +33,7 @@ class Controller:
         lista = self._model.get_strumenti()
         if not lista:
             self._view.update()
-            self._view.show_alert("❌ Non sono presenti strumenti nel database!.")
+            self._view.show_alert("❌ Errore: Non sono presenti strumenti nel database!.")
             return
 
         self._view.lista_strumenti.controls.clear()
@@ -47,7 +47,7 @@ class Controller:
         self._view.lista_strumenti_ricerca.controls.clear()
         if not listaTipo:
             self._view.update()
-            self._view.show_alert("❌ Strumento non presente nel database!")
+            self._view.show_alert("❌ Errore: Strumento non presente nel database!")
             return
 
         for strumento in listaTipo:
